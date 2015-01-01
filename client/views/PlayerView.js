@@ -9,6 +9,7 @@ var PlayerView = Backbone.View.extend({
     this.model.on('play', this.triggerPlay, this);
     // when song changes, retrigger render.
     this.model.on('change', this.render, this);
+    this.collection.on('remove', this.stopCheck, this);
   },
 
   events: {
@@ -19,11 +20,17 @@ var PlayerView = Backbone.View.extend({
     // when song is complete
     // remove completes song from queue
     // play next song in queue
-    this.model.completed();
+    this.model.ended();
   },
 
   triggerPlay: function(e) {
     this.el.play();
+  },
+
+  stopCheck: function() {
+    if(!this.collection.models.length){
+      this.setSong();
+    }
   },
 
   setSong: function(song){
