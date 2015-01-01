@@ -6,6 +6,24 @@ var PlayerView = Backbone.View.extend({
   el: '<audio controls autoplay />',
 
   initialize: function() {
+    this.model.on('play', this.triggerPlay, this);
+    // when song changes, retrigger render.
+    this.model.on('change', this.render, this);
+  },
+
+  events: {
+    'ended': 'triggerComplete'
+  },
+
+  triggerComplete: function(e) {
+    // when song is complete
+    // remove completes song from queue
+    // play next song in queue
+    this.model.completed();
+  },
+
+  triggerPlay: function(e) {
+    this.el.play();
   },
 
   setSong: function(song){
