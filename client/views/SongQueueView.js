@@ -3,6 +3,10 @@ var SongQueueView = Backbone.View.extend({
 
   tagName: 'table',
 
+  attributes: {
+    cellpadding: '5px'
+  },
+
   initialize: function() {
     this.render();
     this.collection.on('all', this.render, this);

@@ -3,6 +3,10 @@ var LibraryView = Backbone.View.extend({
 
   tagName: "table",
 
+  attributes: {
+    cellpadding: '5px'
+  },
+
   initialize: function() {
     this.render();
   },

@@ -22,6 +22,7 @@ var SongQueue = Songs.extend({
 
   ended: function(model){
     this.dequeue(model);
+    model.set('playcount', model.get('playcount') + 1);
     if(this.models.length) {
       this.playFirst();
     }
